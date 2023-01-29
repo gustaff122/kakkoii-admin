@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+body {
+  @apply text-white;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+}
+
+.bg {
+  &-gradient {
+    background: linear-gradient(to bottom, #485563, #29323c);
+  }
+
+  &-glass {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+}
+
+.ng-select-container {
+  height: 46px !important;
+  display: flex;
+  align-items: center;
+
+  input {
+    margin-top: 7px;
+  }
+}

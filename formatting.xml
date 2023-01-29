@@ -1,0 +1,129 @@
+<code_scheme name="levelpro-frontend" version="173">
+    <option name="OTHER_INDENT_OPTIONS">
+        <value>
+            <option name="INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </value>
+    </option>
+    <option name="LINE_SEPARATOR" value="&#13;&#10;"/>
+    <option name="RIGHT_MARGIN" value="220"/>
+    <option name="ENABLE_SECOND_REFORMAT" value="true"/>
+    <option name="SOFT_MARGINS" value="220"/>
+    <option name="DO_NOT_FORMAT">
+        <list>
+            <fileSet type="globPattern" pattern="CHANGELOG.md"/>
+            <fileSet type="globPattern" pattern="messages.en.xlf"/>
+        </list>
+    </option>
+    <CssCodeStyleSettings>
+        <option name="HEX_COLOR_LOWER_CASE" value="true"/>
+        <option name="HEX_COLOR_LONG_FORMAT" value="true"/>
+    </CssCodeStyleSettings>
+    <JSCodeStyleSettings version="0">
+        <option name="FORCE_SEMICOLON_STYLE" value="true"/>
+        <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACKETS" value="true"/>
+        <option name="USE_DOUBLE_QUOTES" value="false"/>
+        <option name="FORCE_QUOTE_STYlE" value="true"/>
+        <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline"/>
+        <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true"/>
+        <option name="SPACES_WITHIN_IMPORTS" value="true"/>
+    </JSCodeStyleSettings>
+    <LessCodeStyleSettings>
+        <option name="HEX_COLOR_LOWER_CASE" value="true"/>
+        <option name="HEX_COLOR_LONG_FORMAT" value="true"/>
+    </LessCodeStyleSettings>
+    <ScssCodeStyleSettings>
+        <option name="HEX_COLOR_LOWER_CASE" value="true"/>
+        <option name="HEX_COLOR_LONG_FORMAT" value="true"/>
+    </ScssCodeStyleSettings>
+    <TypeScriptCodeStyleSettings version="0">
+        <option name="FORCE_SEMICOLON_STYLE" value="true"/>
+        <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACKETS" value="true"/>
+        <option name="USE_PUBLIC_MODIFIER" value="true"/>
+        <option name="PREFER_AS_TYPE_CAST" value="true"/>
+        <option name="USE_DOUBLE_QUOTES" value="false"/>
+        <option name="FORCE_QUOTE_STYlE" value="true"/>
+        <option name="PREFER_EXPLICIT_TYPES_VARS_FIELDS" value="true"/>
+        <option name="PREFER_EXPLICIT_TYPES_FUNCTION_RETURNS" value="true"/>
+        <option name="PREFER_EXPLICIT_TYPES_FUNCTION_EXPRESSION_RETURNS" value="true"/>
+        <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline"/>
+        <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true"/>
+        <option name="SPACES_WITHIN_IMPORTS" value="true"/>
+        <option name="USE_PATH_MAPPING" value="DIFFERENT_PATHS"/>
+    </TypeScriptCodeStyleSettings>
+    <editorconfig>
+        <option name="ENABLED" value="false"/>
+    </editorconfig>
+    <codeStyleSettings language="CSS">
+        <indentOptions>
+            <option name="INDENT_SIZE" value="2"/>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+        <arrangement>
+            <rules>
+                <section>
+                    <rule>
+                        <match>
+                            <NAME>.*</NAME>
+                        </match>
+                        <order>BY_NAME</order>
+                    </rule>
+                </section>
+            </rules>
+        </arrangement>
+    </codeStyleSettings>
+    <codeStyleSettings language="HTML">
+        <option name="RIGHT_MARGIN" value="500"/>
+        <indentOptions>
+            <option name="INDENT_SIZE" value="2"/>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="JSON">
+        <option name="RIGHT_MARGIN" value="220"/>
+    </codeStyleSettings>
+    <codeStyleSettings language="JavaScript">
+        <option name="RIGHT_MARGIN" value="220"/>
+        <indentOptions>
+            <option name="INDENT_SIZE" value="2"/>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="LESS">
+        <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="SASS">
+        <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="SCSS">
+        <arrangement>
+            <rules>
+                <section>
+                    <rule>
+                        <match>
+                            <NAME>.*</NAME>
+                        </match>
+                        <order>BY_NAME</order>
+                    </rule>
+                </section>
+            </rules>
+        </arrangement>
+    </codeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+        <option name="RIGHT_MARGIN" value="220"/>
+        <indentOptions>
+            <option name="INDENT_SIZE" value="2"/>
+            <option name="CONTINUATION_INDENT_SIZE" value="2"/>
+            <option name="TAB_SIZE" value="2"/>
+        </indentOptions>
+    </codeStyleSettings>
+</code_scheme>

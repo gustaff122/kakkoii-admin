@@ -1,0 +1,156 @@
+<div class="w-full min-h-screen flex justify-center items-center py-10">
+  <div class="bg-glass h-3/4 p-10 w-[842px] h-[482px]">
+    <h1 class="h-2 !mb-12">Dodawanie Nowej Serii</h1>
+    <ng-container [ngTemplateOutlet]="(step === 0) ? titleFormTpl : (step === 1) ? infoFormTpl : (step === 2) ? dateFormTpl : imagesFormTpl"></ng-container>
+    <div class="mt-8 flex w-full justify-between">
+      <button [disabled]="step === 0" (click)="prevStep()" color="accent" mat-flat-button>Poprzedni krok</button>
+      <button *ngIf="step < 3" (click)="nextStep()" color="accent" mat-flat-button>Kolejny krok</button>
+      <button *ngIf="step === 3" (click)="addSeries()" color="primary" mat-flat-button>Dodaj serię</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #titleFormTpl>
+  <form class="grid grid-cols-2 gap-x-10" [formGroup]="form">
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <kk-input formControlName="titleEn" label="Tytuł angielski" type="text"></kk-input>
+      <kk-input formControlName="titleJpRom" label="Tytuł japoński [romanizowany]" type="text"></kk-input>
+      <kk-input formControlName="titleJp" label="Tytuł japoński" type="text"></kk-input>
+    </div>
+    <div formArrayName="titlesAlt" class="flex flex-col gap-y-5">
+      <div class="flex items-center" *ngFor="let _ of titlesAlt.controls; let i = index" [formGroupName]="i">
+        <kk-input formControlName="title" [label]="i === 0 ? 'Tytuł alternatywny' : 'Kolejny tytuł alternatywny'" type="text"></kk-input>
+        <button [disabled]="i === 0" (click)="removeTitleAlt(i)" [ngClass]="i === 0 ? 'text-zinc-500' : 'text-rose-500'" class="ml-4 mt-7 rounded-md ">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button (click)="addTitleAlt()" *ngIf="titlesAlt.controls.length <= 2" mat-flat-button>Dodaj tytuł alternatywny</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #infoFormTpl>
+  <form class="grid grid-cols-2 gap-x-10" [formGroup]="form">
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Opis</span>
+        </label>
+        <textarea formControlName="synopsis" placeholder="Główny bohater zostaje potrącony przez ciężarówkę..." class="w-full h-[140px] py-3 px-3 text-slate-700 outline-none rounded-md shadow-sm resize-none"></textarea>
+      </div>
+
+      <kk-input formControlName="studio" label="Studio" type="text"></kk-input>
+    </div>
+
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Tagi</span>
+        </label>
+        <ng-select [multiple]="true" [closeOnSelect]="false" class="w-80 h-[46px]" formControlName="tags">
+          <ng-option *ngFor="let tag of tags" [value]="tag">{{ tag }}</ng-option>
+        </ng-select>
+      </div>
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Czy NSFW</span>
+        </label>
+        <ng-select placeholder="Onii-san... Please..." class="w-80 h-[46px]" formControlName="nsfw">
+          <ng-option [value]="false">Tak</ng-option>
+          <ng-option [value]="true">Nie</ng-option>
+        </ng-select>
+      </div>
+
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Źródło</span>
+        </label>
+        <ng-select class="w-full h-[46px]" formControlName="source">
+          <ng-option [value]="'light_novel'">Light Novel</ng-option>
+          <ng-option [value]="'manga'">Manga</ng-option>
+          <ng-option [value]="'manhwa'">Manhwa</ng-option>
+          <ng-option [value]="'original'">Seria oryginalna</ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #dateFormTpl>
+  <form class="grid grid-cols-2 gap-x-10" [formGroup]="form">
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <kk-input formControlName="startDate" label="Data rozpoczecia emisji" type="date"></kk-input>
+      <kk-input formControlName="episodesCount" label="Liczba odcinków" type="number"></kk-input>
+
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Status</span>
+        </label>
+        <ng-select class="w-full h-[46px]" formControlName="status">
+          <ng-option *ngFor="let status of statuses" [value]="status">{{ status }}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <kk-input formControlName="endDate" label="Data zakończenia emisji" type="date"></kk-input>
+      <kk-input formControlName="episodeDuration" label="Czas trwania odcinka [min]" type="number"></kk-input>
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Grupa wiekowa</span>
+        </label>
+        <ng-select class="w-full h-[46px]" formControlName="ageRating">
+          <ng-option *ngFor="let ageRating of ageRatings" [value]="ageRating">{{ ageRating }}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #imagesFormTpl>
+  <form class="grid grid-cols-2 gap-x-10" [formGroup]="form">
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Plakat [pionowy]</span>
+        </label>
+        <ngx-dropzone class="!h-[138px]" [multiple]="false" (change)="onSelectPoster($event)">
+          <ngx-dropzone-label>Przerzuć plakat!</ngx-dropzone-label>
+          <ngx-dropzone-image-preview *ngIf="thumbnail$ | async" [file]="thumbnail$ | async" ngProjectAs="ngx-dropzone-preview">
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+
+      <kk-input formControlName="trailerUrl" label="Link do zapowiedzi" type="text"></kk-input>
+    </div>
+
+    <div class="flex flex-col gap-y-5 h-[276px]">
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Obraz [poziomy]</span>
+        </label>
+        <ngx-dropzone class="!h-[138px]" [multiple]="false" (change)="onSelectImage($event)">
+          <ngx-dropzone-label>Przerzuć obraz!</ngx-dropzone-label>
+          <ngx-dropzone-image-preview *ngIf="image$ | async" [file]="image$ | async" ngProjectAs="ngx-dropzone-preview">
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+
+      <div class="w-80 flex flex-col gap-y-2">
+        <label>
+          <span>Typ</span>
+        </label>
+        <ng-select class="w-full h-[46px]" formControlName="type">
+          <ng-option [value]="'tv'">TV</ng-option>
+          <ng-option [value]="'movie'">Movie</ng-option>
+          <ng-option [value]="'special'">Special</ng-option>
+          <ng-option [value]="'ona'">ONA</ng-option>
+          <ng-option [value]="'ova'">OVA</ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
