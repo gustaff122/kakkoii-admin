@@ -96,9 +96,9 @@ export class SeriesAddComponent implements OnInit {
 
   private buildForm(): void {
     this.formTitles = this.formBuilder.group<SeriesTitlesForm>({
-      titleEn: new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(96) ]),
-      titleJpRom: new FormControl(null, [ Validators.required, Validators.maxLength(96) ]),
-      titleJp: new FormControl(null, [ Validators.required, Validators.maxLength(96) ]),
+      titleEn: new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(256) ]),
+      titleJpRom: new FormControl(null, [ Validators.required, Validators.maxLength(256) ]),
+      titleJp: new FormControl(null, [ Validators.required, Validators.maxLength(256) ]),
       titlesAlt: new FormArray([]),
     });
 
