@@ -17,6 +17,6 @@ export class SeriesService {
   }
 
   public addNewSeries(data: FormData): Observable<Series> {
-    return this.httpClient.post<Series>(`${this.API_URL}/series`, { data });
-  };
+    return this.httpClient.post<Series>(`${this.API_URL}/series`, data);
+  }
 }

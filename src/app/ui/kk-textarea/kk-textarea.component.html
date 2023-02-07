@@ -3,12 +3,11 @@
     <span>{{ label }}</span>
     <span class="ms-1" *ngIf="isRequired">*</span>
   </label>
-  <input
-    class="w-80 p-3 text-slate-700 outline-none rounded-md shadow-sm kk-input"
-    [type]="type"
+  <textarea
+    class="w-80 h-[140px] p-3 text-slate-700 outline-none rounded-md shadow-sm resize-none kk-input"
     [disabled]="disabled"
     [placeholder]="placeholder"
     [(ngModel)]="innerValue"
     (ngModelChange)="updateChanges()"
-  />
+  ></textarea>
 </div>

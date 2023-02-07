@@ -10,9 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { SeriesAddComponent } from './views/series-add/series-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KkInputComponent } from '../../ui/kk-input/kk-input.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { KkInputComponent } from '../../ui/kk-input/kk-input.component';
+import { KkTextareaComponent } from '../../ui/kk-textarea/kk-textarea.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     KkInputComponent,
     NgSelectModule,
     NgxDropzoneModule,
+    KkTextareaComponent,
   ],
 })
 export class SeriesModule {

@@ -20,6 +20,7 @@ export interface Series {
   episodeDuration?: number;
   episodesCount?: number;
   nsfw?: boolean;
+  studio?: string;
   status: SeriesStatus;
   prequels?: SeriesRelations;
   sequels?: SeriesRelations;

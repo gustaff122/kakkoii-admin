@@ -1,6 +1,6 @@
 import { Component, OnInit, Self } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SeriesForm } from '../../../../interfaces/series-form';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SeriesDatesForm, SeriesMoreForm, SeriesRestForm, SeriesTitlesForm } from '../../../../interfaces/series-form';
 import { seriesTagsSet } from '../../../../data/series-tags-set';
 import { SeriesTags } from '../../../../types/series-tags';
 import { SeriesStatus } from '../../../../types/series-status';
@@ -28,7 +28,10 @@ export class SeriesAddComponent implements OnInit {
   public readonly tags: SeriesTags[] = seriesTagsSet;
   public readonly statuses: SeriesStatus[] = seriesStatusSet;
   public readonly ageRatings: SeriesAgeRating[] = seriesAgeRatingSet;
-  public form: FormGroup<SeriesForm>;
+  public formTitles: FormGroup<SeriesTitlesForm>;
+  public formMore: FormGroup<SeriesMoreForm>;
+  public formDates: FormGroup<SeriesDatesForm>;
+  public formRest: FormGroup<SeriesRestForm>;
   public step = 0;
 
   constructor(
@@ -43,7 +46,7 @@ export class SeriesAddComponent implements OnInit {
   }
 
   public get titlesAlt(): FormArray {
-    return this.form.get('titlesAlt') as FormArray;
+    return this.formTitles.get('titlesAlt') as FormArray;
   }
 
   public addTitleAlt(): void {
@@ -55,10 +58,14 @@ export class SeriesAddComponent implements OnInit {
   }
 
   public addSeries(): void {
-    let fixedForm: any = this.form.getRawValue();
+    let fixedForm: any = { ...this.formTitles.getRawValue(), ...this.formMore.getRawValue(), ...this.formDates.getRawValue(), ...this.formRest.getRawValue() };
     fixedForm.titlesAlt = fixedForm.titlesAlt.map((obj: any) => obj.title);
     let series: Series = fixedForm;
-    this.seriesAddComponentStore.addSeries({ series });
+
+    console.log(series);
+    if (this.formRest.valid) {
+      this.seriesAddComponentStore.addSeries({ series });
+    }
   }
 
   public onSelectPoster(file: NgxDropzoneChangeEvent): void {
@@ -88,24 +95,35 @@ export class SeriesAddComponent implements OnInit {
   }
 
   private buildForm(): void {
-    this.form = this.formBuilder.group<SeriesForm>({
-      titleEn: new FormControl(null),
-      titleJpRom: new FormControl(null),
-      titleJp: new FormControl(null),
+    this.formTitles = this.formBuilder.group<SeriesTitlesForm>({
+      titleEn: new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(96) ]),
+      titleJpRom: new FormControl(null, [ Validators.required, Validators.maxLength(96) ]),
+      titleJp: new FormControl(null, [ Validators.required, Validators.maxLength(96) ]),
       titlesAlt: new FormArray([]),
+    });
+
+    this.formMore = this.formBuilder.group<SeriesMoreForm>({
+      synopsis: new FormControl(null, [ Validators.required, Validators.maxLength(1024) ]),
+      tags: new FormControl(null, [ Validators.required ]),
+      studio: new FormControl(null),
+      nsfw: new FormControl(null, [ Validators.required ]),
+      source: new FormControl(null, [ Validators.required ]),
+    });
+
+    this.formDates = this.formBuilder.group<SeriesDatesForm>({
       startDate: new FormControl(null),
       endDate: new FormControl(null),
-      synopsis: new FormControl(null),
-      tags: new FormControl(null),
-      ageRating: new FormControl(null),
-      type: new FormControl(null),
-      episodeDuration: new FormControl(24),
-      episodesCount: new FormControl(12),
-      nsfw: new FormControl(null),
-      status: new FormControl(null),
-      source: new FormControl(null),
+      episodeDuration: new FormControl(24, [ Validators.required ]),
+      episodesCount: new FormControl(12, [ Validators.required ]),
+      ageRating: new FormControl(null, [ Validators.required ]),
+      status: new FormControl(null, [ Validators.required ]),
+    });
+
+    this.formRest = this.formBuilder.group<SeriesRestForm>({
+      type: new FormControl(null, [ Validators.required ]),
       trailerUrl: new FormControl(null),
-      studio: new FormControl(null),
     });
   }
+
+
 }

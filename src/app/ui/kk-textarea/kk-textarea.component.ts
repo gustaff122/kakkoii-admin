@@ -3,9 +3,9 @@ import { AbstractControl, ControlValueAccessor, FormsModule, NgControl, Reactive
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'kk-input',
-  templateUrl: './kk-input.component.html',
-  styleUrls: [ './kk-input.component.scss' ],
+  selector: 'kk-textarea',
+  templateUrl: './kk-textarea.component.html',
+  styleUrls: [ './kk-textarea.component.scss' ],
   standalone: true,
   imports: [
     CommonModule,
@@ -13,8 +13,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
   ],
 })
-
-export class KkInputComponent implements OnInit, ControlValueAccessor {
+export class KkTextareaComponent implements OnInit, ControlValueAccessor {
   @Input() disabled: boolean = false;
   @Input() type: string = 'text';
   @Input() placeholder: string = '';

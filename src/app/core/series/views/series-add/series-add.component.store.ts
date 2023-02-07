@@ -39,36 +39,36 @@ export class SeriesAddComponentStore extends DefaultComponentStore<SeriesAddComp
         });
       }),
       exhaustMap(({ series }) => {
-        const formData = new FormData();
         const thumbnail = this.get().thumbnail;
         const image = this.get().image;
-        console.log(series.tags);
+        const formData = new FormData();
 
         formData.append('titleEn', series.titleEn);
         formData.append('titleJpRom', series.titleJpRom);
-        formData.append('titleJp', series.titleJp);
-        formData.append('titlesAlt', series.titlesAlt.toString());
+        series.titlesAlt?.map(title => formData.append('titlesAlt[]', title));
         formData.append('startDate', series.startDate);
         formData.append('endDate', series.endDate);
-        formData.append('synopsis', series.endDate);
-        formData.append('tags', series.tags.toString());
+        formData.append('synopsis', series.synopsis);
+        series.tags.map(tag => formData.append('tags[]', tag));
+        formData.append('thumbnailUrl', series?.thumbnailUrl);
         formData.append('ageRating', series.ageRating);
         formData.append('type', series.type);
-        formData.append('episodeDuration', series.episodeDuration.toString());
-        formData.append('episodesCount', series.episodesCount.toString());
-        formData.append('nsfw', series.nsfw.toString());
+        formData.append('episodeDuration', series?.episodeDuration.toString());
+        formData.append('episodesCount', series?.episodesCount.toString());
+        formData.append('nsfw', series?.nsfw.toString());
+        formData.append('studio', series?.studio);
         formData.append('status', series.status);
+
         formData.append('thumbnail', thumbnail);
         formData.append('image', image);
 
         return this.seriesService.addNewSeries(formData).pipe(
-          tapResponse((res) => {
+          tapResponse(() => {
             this.patchState({
               loading: false,
             });
-            console.log(res);
+
           }, ({ error }: HttpErrorResponse) => {
-            console.log(error);
             this.patchState({
               loading: false,
               error,

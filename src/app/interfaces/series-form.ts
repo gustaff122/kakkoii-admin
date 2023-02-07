@@ -3,25 +3,39 @@ import { SeriesType } from '../types/series-type';
 import { SeriesStatus } from '../types/series-status';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
+/*
 export interface SeriesForm {
+  //prequels: SeriesRelations;
+  //sequels: SeriesRelations;
+  //alternativeStories: SeriesRelations;
+}
+*/
+
+export interface SeriesTitlesForm {
   titleEn: FormControl<string>;
   titleJpRom: FormControl<string>;
   titleJp: FormControl<string>;
   titlesAlt: FormArray<FormGroup<{ title: FormControl<string> }>>;
+}
+
+export interface SeriesMoreForm {
+  synopsis: FormControl<string>;
+  studio: FormControl<string>;
+  tags: FormControl<SeriesType[]>;
+  nsfw: FormControl<boolean>;
+  source: FormControl<string>;
+}
+
+export interface SeriesDatesForm {
   startDate: FormControl<string>;
   endDate: FormControl<string>;
-  synopsis: FormControl<string>;
-  trailerUrl: FormControl<string>;
-  studio: FormControl<string>;
-  source: FormControl<string>;
-  ageRating: FormControl<SeriesAgeRating>;
-  type: FormControl<SeriesType>;
+  status: FormControl<SeriesStatus>;
   episodeDuration?: FormControl<number>;
   episodesCount?: FormControl<number>;
-  nsfw: FormControl<boolean>;
-  status: FormControl<SeriesStatus>;
-  tags: FormControl<SeriesType[]>;
-  //prequels: SeriesRelations;
-  //sequels: SeriesRelations;
-  //alternativeStories: SeriesRelations;
+  ageRating: FormControl<SeriesAgeRating>;
+}
+
+export interface SeriesRestForm {
+  trailerUrl: FormControl<string>;
+  type: FormControl<SeriesType>;
 }
