@@ -25,6 +25,9 @@ describe('dodawanie serii', () => {
     cy.get('span').contains('Drama').click({ force: true });
     cy.get('span').contains('Fantasy').click({ force: true });
     cy.get('span').contains('Romance').click({ force: true });
+    cy.get('[formcontrolname="nsfw"]').get(':nth-child(2) > .w-80 > .ng-select-container > .ng-arrow-wrapper').click({ force: true }).wait(200);
+    cy.get('span').contains('Nie').click({ force: true });
+    cy.contains('button', 'Kolejny krok').click({ force: true });
     //test of declaring source
     cy.get('[formcontrolname="studio"]').type('Pierrot');
     // test of adding name of anime's studio
