@@ -3,9 +3,15 @@
     <p class="text-5xl">Lista Serii</p>
     <h3>Zarządzaj seriami oraz dodawaj nowe</h3>
 
-    <div class="w-full grid grid-cols-3 2xl:grid-cols-4 gap-12 mt-10">
-      <kk-series-add-new-button></kk-series-add-new-button>
-      <kk-series-card *ngFor="let series of placeholder" [series]="series"></kk-series-card>
-    </div>
+    <form [formGroup]="form">
+      <kk-input formControlName="name" placeholder="Szukaj serii..."></kk-input>
+    </form>
+
+    <kk-infinite-scroll (scrolled)="getSeriesNextPage()">
+      <div class="w-full grid grid-cols-3 2xl:grid-cols-4 gap-12 mt-10">
+        <kk-series-add-new-button></kk-series-add-new-button>
+        <kk-series-card *ngFor="let series of series$ | async" [series]="series"></kk-series-card>
+      </div>
+    </kk-infinite-scroll>
   </div>
 </div>

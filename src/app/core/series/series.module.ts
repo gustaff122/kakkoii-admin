@@ -14,6 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { KkInputComponent } from '../../ui/kk-input/kk-input.component';
 import { KkTextareaComponent } from '../../ui/kk-textarea/kk-textarea.component';
+import { InfiniteScrollComponent } from '../../utils/infinite-scroll/infinite-scroll.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { KkTextareaComponent } from '../../ui/kk-textarea/kk-textarea.component'
     NgSelectModule,
     NgxDropzoneModule,
     KkTextareaComponent,
+    InfiniteScrollComponent,
   ],
 })
 export class SeriesModule {

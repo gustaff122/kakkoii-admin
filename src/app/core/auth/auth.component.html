@@ -1,11 +1,11 @@
 <div class="h-screen w-full flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-md w-1/2 h-1/2 flex items-center relative bg-slate-200">
     <h4 class="absolute inset-6 text-slate-700 h-4 w-full">Kakkoi | Admin Panel</h4>
-    <form [formGroup]="form" class="w-1/2 pl-6 flex flex-col gap-y-5">
-      <kk-input label="Login" [labelBlack]="true" type="text" formControlName="name" required placeholder="Wpisz login..."></kk-input>
+    <form [formGroup]="form" class="w-1/2 pl-6 flex flex-col gap-y-5" (submit)="login()">
+      <kk-input label="E-mail" [labelBlack]="true" type="email" formControlName="email" required placeholder="Wpisz email..."></kk-input>
       <kk-input label="Hasło" [labelBlack]="true" type="password" formControlName="password" required placeholder="Wpisz hasło..."></kk-input>
 
-      <button class="w-80 py-4 bg-pink-700 rounded-md shadow-sm text-white font-semibold tracking-widest mt-3" mat-ripple>Zaloguj mnie</button>
+      <button type="submit" class="w-80 py-4 bg-pink-700 rounded-md shadow-sm text-white font-semibold tracking-widest mt-3" mat-ripple>Zaloguj mnie</button>
     </form>
     <div class="w-1/2 h-full rounded-r-md p-5 shadow-md bg-white">
       <img class="object-cover w-full h-full rounded-r-md shadow-xl" src="assets/auth.jpg" alt=""/>

@@ -14,6 +14,7 @@ export interface Series {
   synopsis: string;
   tags: SeriesTags[];
   thumbnailUrl?: string;
+  imageUrl?: string;
   trailerUrl?: string;
   ageRating: SeriesAgeRating;
   type: SeriesType;

@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DefaultComponentState, DefaultComponentStore } from '../../../../utils/default.component.store';
 import { Series } from '../../../../interfaces/series';
 import { SeriesService } from '../../../../services/series.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface SeriesAddComponentState extends DefaultComponentState {
   thumbnail: File | null;
@@ -68,6 +70,9 @@ export class SeriesAddComponentStore extends DefaultComponentStore<SeriesAddComp
               loading: false,
             });
 
+            this.router.navigate([ 'series' ]).then(() => {
+              this.matSnackBar.open('Seria została dodana!');
+            });
           }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
@@ -81,6 +86,8 @@ export class SeriesAddComponentStore extends DefaultComponentStore<SeriesAddComp
 
   constructor(
     private readonly seriesService: SeriesService,
+    private readonly router: Router,
+    private readonly matSnackBar: MatSnackBar,
   ) {
     super({
       thumbnail: null,

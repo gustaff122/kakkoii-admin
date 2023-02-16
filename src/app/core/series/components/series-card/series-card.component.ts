@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Series } from '../../../../interfaces/series';
 
 @Component({
   selector: 'kk-series-card',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: [ './series-card.component.scss' ],
 })
 export class SeriesCardComponent {
-  @Input() series: any;
+  @Input() series: Series;
 }
