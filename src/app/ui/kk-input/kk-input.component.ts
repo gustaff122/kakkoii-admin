@@ -22,7 +22,7 @@ export class KkInputComponent implements OnInit, ControlValueAccessor {
   @Input() labelBlack: boolean = false;
 
   public isRequired: boolean = false;
-  public innerValue: string = '';
+  public innerValue: string | number = null;
 
   public touched = false;
 
@@ -49,7 +49,7 @@ export class KkInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  public writeValue(value: string | null): void {
+  public writeValue(value: string | number | null): void {
     this.innerValue = value;
     this.registerOnTouched(!!this.onTouch);
   }

@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { tapResponse } from '@ngrx/component-store';
 import { JwtService } from '../../services/jwt.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface AuthComponentState extends DefaultComponentState {
 }
@@ -36,6 +37,8 @@ export class AuthComponentStore extends DefaultComponentStore<AuthComponentState
               loading: false,
               error,
             });
+
+            this.matSnackBar.open('Nie udało się zalogować. Sprawdź e-mail i hasło.');
           }),
         );
       }),
@@ -46,6 +49,7 @@ export class AuthComponentStore extends DefaultComponentStore<AuthComponentState
     private readonly authService: AuthService,
     private readonly jwtService: JwtService,
     private readonly router: Router,
+    private readonly matSnackBar: MatSnackBar
   ) {
     super({
       loading: false,

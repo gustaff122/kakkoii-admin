@@ -1,18 +1,26 @@
-<div class="w-full flex flex-col h-72 bg-gradient rounded-lg shadow-xl hover:scale-105 transition-transform cursor-pointer">
-  <div class="w-full h-2/5 relative">
-    <div class="flex items-center bg-slate-600 !text-white absolute top-1 right-1 text-black justify-center rounded-md pt-0.5 px-4">
-      <mat-icon class="text-sm justify-center">watch_later</mat-icon>
-      <span class="text-sm">{{ series.episodeDuration }}</span>
+<a [routerLink]="['../edit', series._id]">
+  <div class="w-full flex flex-col h-72 bg-gradient rounded-lg shadow-xl hover:scale-105 transition-transform cursor-pointer">
+    <div class="w-full h-2/5 relative">
+      <div *ngIf="series.episodesCount" class="flex items-center bg-slate-600 !text-white absolute top-1 right-1 text-black justify-center rounded-md pt-0.5 px-4">
+        <mat-icon class="text-sm justify-center">watch_later</mat-icon>
+        <span class="text-sm">{{ series.episodesCount }}</span>
+      </div>
+      <img alt="" [src]="series.imageUrl" class="object-cover rounded-t-lg w-full h-full"/>
     </div>
-    <img alt="" [src]="series.imageUrl" class="object-cover rounded-t-lg w-full h-full"/>
-  </div>
-  <div class="h-3/5 p-5">
-    <p>{{ series.titleEn }}</p>
-    <span *ngFor="let tag of series.tags; let i=index">
+    <div class="h-3/5 p-5">
+      <p>{{ series.titleEn }}</p>
+      <span *ngFor="let tag of series.tags; let i=index">
       <span class="text-xs bg-blue-500 px-3 py-0.5 rounded-sm mr-3" *ngIf="i < 3">{{ tag | titlecase }}</span>
     </span>
-    <p class="text-neutral-300 pt-4 line-clamp-3">
-      {{ series.synopsis }}
-    </p>
+      <p class="text-neutral-300 pt-4 line-clamp-3">
+        {{ series.synopsis }}
+      </p>
+    </div>
   </div>
-</div>
+</a>
+
+<a [routerLink]="['../episodes', series._id]">
+  <button class="w-full mt-3 p-2 bg-slate-700 rounded-md shadow-md hover:scale-105 transition-transform">
+    Zarządzaj odcinkami
+  </button>
+</a>

@@ -1,7 +1,9 @@
 <div class="w-full min-h-screen flex justify-center items-center py-10">
-  <div class="bg-glass h-3/4 p-10 w-[842px] h-[482px]">
-    <h1 class="h-2 !mb-12">Dodawanie Nowej Serii</h1>
-    <ng-container [ngTemplateOutlet]="(step === 0) ? titleFormTpl : (step === 1) ? infoFormTpl : (step === 2) ? dateFormTpl : imagesFormTpl"></ng-container>
+  <div class="bg-glass p-10 w-[842px] h-[482px]">
+    <h1 class="h-2 !mb-12">
+      {{ isCreating ? 'Dodawanie Nowej Serii' : 'Aktualizowanie Serii' }}
+    </h1>
+    <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : (step === 0) ? titleFormTpl : (step === 1) ? infoFormTpl : (step === 2) ? dateFormTpl : imagesFormTpl"></ng-container>
   </div>
 </div>
 
@@ -167,6 +169,14 @@
   </form>
   <div class="mt-8 flex w-full justify-between">
     <button (click)="prevStep()" color="accent" mat-flat-button>Poprzedni krok</button>
-    <button (click)="addSeries()" [disabled]="formRest.invalid" color="primary" mat-flat-button>Dodaj serię</button>
+    <button (click)="confirmSeries()" [disabled]="formRest.invalid" color="primary" mat-flat-button>
+      {{ isCreating ? 'Dodaj serię' : 'Zaktualizuj serię' }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div class="flex h-full w-full items-center justify-center pb-32">
+    <kk-loading-spinner></kk-loading-spinner>
   </div>
 </ng-template>

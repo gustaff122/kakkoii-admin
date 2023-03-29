@@ -1,0 +1,19 @@
+<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : contentTpl"></ng-container>
+
+<ng-template #contentTpl>
+  <button mat-icon-button (click)="changeWantToDelete()" *ngIf="!wantToDelete">
+    <mat-icon>
+      remove_circle_outline
+    </mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="deleteMirror()" *ngIf="wantToDelete">
+    <mat-icon>
+      remove_circle
+    </mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <kk-loading-spinner></kk-loading-spinner>
+</ng-template>

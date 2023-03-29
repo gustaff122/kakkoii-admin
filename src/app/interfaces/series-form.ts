@@ -2,6 +2,7 @@ import { SeriesAgeRating } from '../types/series-age-rating';
 import { SeriesType } from '../types/series-type';
 import { SeriesStatus } from '../types/series-status';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { SeriesTags } from '../types/series-tags';
 
 /*
 export interface SeriesForm {
@@ -21,7 +22,7 @@ export interface SeriesTitlesForm {
 export interface SeriesMoreForm {
   synopsis: FormControl<string>;
   studio: FormControl<string>;
-  tags: FormControl<SeriesType[]>;
+  tags: FormControl<SeriesTags[]>;
   nsfw: FormControl<boolean>;
   source: FormControl<string>;
 }

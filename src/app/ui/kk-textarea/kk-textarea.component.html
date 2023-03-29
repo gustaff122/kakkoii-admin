@@ -1,10 +1,10 @@
-<div class="w-80 flex flex-col gap-y-2">
+<div class="w-72 2xl:w-80 flex flex-col gap-y-2">
   <label *ngIf="label" [ngClass]="labelBlack ? 'text-slate-600' : 'text-slate-50'">
     <span>{{ label }}</span>
     <span class="ms-1" *ngIf="isRequired">*</span>
   </label>
   <textarea
-    class="w-80 h-[140px] p-3 text-slate-700 outline-none rounded-md shadow-sm resize-none kk-input"
+    class="w-72 2xl:w-80 h-[140px] p-3 text-slate-700 outline-none rounded-md shadow-sm resize-none kk-input"
     [disabled]="disabled"
     [placeholder]="placeholder"
     [(ngModel)]="innerValue"

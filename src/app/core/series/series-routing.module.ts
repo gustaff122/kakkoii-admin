@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SeriesRoutingComponent } from './series-routing.component';
 import { SeriesListComponent } from './views/series-list/series-list.component';
 import { SeriesAddComponent } from './views/series-add/series-add.component';
+import { SeriesEpisodesComponent } from './views/series-episdoes/series-episodes.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
       {
         path: 'add',
         component: SeriesAddComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: SeriesAddComponent,
+      },
+      {
+        path: 'episodes/:id',
+        component: SeriesEpisodesComponent,
       },
     ],
   },

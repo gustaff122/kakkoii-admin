@@ -2,12 +2,16 @@ import { Component, OnDestroy, OnInit, Self } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Observable, Subscription } from 'rxjs';
 import { Series } from '../../../../interfaces/series';
 import { SeriesListComponentStore } from './series-list.component.store';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { KkInputComponent } from '../../../../ui/kk-input/kk-input.component';
+import { InfiniteScrollComponent } from '../../../../utils/infinite-scroll/infinite-scroll.component';
+import { CommonModule } from '@angular/common';
+import { SeriesAddNewButtonComponent } from '../../components/series-add-new-button/series-add-new-button.component';
+import { SeriesCardComponent } from '../../components/series-card/series-card.component';
 
 interface FiltersForm {
   name: FormControl<string>;
 }
-
 
 @Component({
   selector: 'kk-series-list',
@@ -15,6 +19,15 @@ interface FiltersForm {
   styleUrls: [ './series-list.component.scss' ],
   providers: [
     SeriesListComponentStore,
+  ],
+  standalone: true,
+  imports: [
+    CommonModule,
+    KkInputComponent,
+    InfiniteScrollComponent,
+    ReactiveFormsModule,
+    SeriesAddNewButtonComponent,
+    SeriesCardComponent,
   ],
 })
 

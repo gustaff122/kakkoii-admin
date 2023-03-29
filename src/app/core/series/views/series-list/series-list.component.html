@@ -11,7 +11,18 @@
       <div class="w-full grid grid-cols-3 2xl:grid-cols-4 gap-12 mt-10">
         <kk-series-add-new-button></kk-series-add-new-button>
         <kk-series-card *ngFor="let series of series$ | async" [series]="series"></kk-series-card>
+        <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : null"></ng-container>
       </div>
     </kk-infinite-scroll>
   </div>
 </div>
+
+<ng-template #loadingTpl>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+  <div class="flex h-72 w-full animate-pulse bg-gradient rounded-lg shadow-xl"></div>
+</ng-template>
