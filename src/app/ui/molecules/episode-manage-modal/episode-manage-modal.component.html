@@ -1,0 +1,15 @@
+<div class="w-full h-full flex justify-center items-center">
+  <div class="w-96 relative bg-smooth-black p-4 rounded flex flex-col gap-y-4">
+    <div class="absolute top-1 right-2">
+      <button (click)="closeHandler()">
+        <span class="material-icons text-base">close</span>
+      </button>
+    </div>
+
+    <div class="text-start">
+      <h1 class="text-2xl ">Zarządzaj odcinkiem</h1>
+    </div>
+    <a (click)="closeHandler()" [routerLink]="['/episodes', pseudo, 'edit', epNumber]" class="w-full bg-royal-blue py-4 rounded text-lg font-roboto">Edytuj odcinek</a>
+    <a (click)="closeHandler()" [routerLink]="['/episodes', pseudo, 'mirrors', epNumber]" class="w-full bg-royal-blue py-4 rounded text-lg font-roboto">Edytuj mirrory</a>
+  </div>
+</div>

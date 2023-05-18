@@ -1,0 +1,16 @@
+<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : (hasSeries$ | async) ? contentTpl : null"></ng-container>
+
+<ng-template #contentTpl>
+  <kk-series-list sectionTitle="Nowości" [series]="series$ | async">
+    <a routerLink="/series/add" class="hover:opacity-70 h-72 md:h-96 w-full flex items-center justify-center flex-col gap-y-3 rounded-lg bg-smooth-black">
+      <span class="material-icons text-5xl">add_circle</span>
+      <p class="font-robot uppercase text-xs font-bold">Dodaj serię</p>
+    </a>
+  </kk-series-list>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div class="w-full flex justify-center py-24">
+    <kk-loading-spinner></kk-loading-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,23 @@
+<div class="w-full h-full flex justify-center items-center">
+  <div class="relative bg-smooth-black p-4 rounded flex flex-col gap-y-4">
+    <div class="absolute top-1 right-2">
+      <button (click)="closeHandler()">
+        <span class="material-icons text-base">close</span>
+      </button>
+    </div>
+
+    <div class="text-start">
+      <h1 class="text-xl lg:text-2xl text-center py-3">Czy na pewno chcesz usunąć element?</h1>
+    </div>
+
+    <div class="flex flex-col lg:flex-row-reverse lg:gap-x-5 gap-y-3 gap-x-10">
+      <div class="w-full lg:w-96">
+        <button (click)="confirm()" type="button" class="btn-gradient-delete text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Usuń element</button>
+      </div>
+
+      <div class="w-full lg:w-96">
+        <button (click)="closeHandler()" type="button" class="btn-gradient-deny text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Anuluj</button>
+      </div>
+    </div>
+  </div>
+</div>

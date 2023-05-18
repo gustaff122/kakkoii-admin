@@ -1,0 +1,37 @@
+<h1 class="text-3xl font-roboto mb-6">{{ series.titleEn }}<span class="text-sky-blue font-bold"> #{{ episode.number }}</span></h1>
+
+<div class="xl:w-6/12 2xl:w-5/12">
+  <h2 class="text-xl font-bold mb-6">Dodaj nowy mirror</h2>
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-3" [formGroup]="form" (submit)="addMirrorHandler()">
+    <kk-input label="Tłumacz" type="text" formControlName="translator"></kk-input>
+    <kk-input label="Nazwa Mirrora" type="text" formControlName="mirror"></kk-input>
+    <kk-input label="Link" type="text" formControlName="url"></kk-input>
+    <kk-input label="Data dodania" type="datetime-local" formControlName="date"></kk-input>
+
+    <div class="md:col-start-2">
+      <button [disabled]="form.invalid" type="submit" class="disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj Mirror</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="(links$ | async) as links" class="grid grid-cols-3 xl:w-6/12 2xl:w-4/12 mt-10">
+  <h2 class="text-xl font-bold mb-6 col-span-3">Lista Mirrorów:</h2>
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Tłumacz</h1>
+    <p class="text-xs md:text-sm font-bold text-neutral-400 h-[29px] flex items-center" *ngFor="let item of links; trackBy: trackByFn">{{ item.translator }}</p>
+  </div>
+
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Nazwa Mirrora</h1>
+    <a [href]="item.url" target="_blank" class="text-xs md:text-sm font-bold text-sky-blue h-[29px] flex items-center" *ngFor="let item of links; trackBy: trackByFn">{{ item.mirror }}</a>
+  </div>
+
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Data dodania</h1>
+    <p class="text-xs md:text-sm font-bold text-neutral-400 flex items-center h-[29px] gap-x-3" *ngFor="let item of links; trackBy: trackByFn">
+      <span class="hidden md:block">{{ item.date | date:'dd.MM.YYYY, HH:mm' }}</span>
+      <span class="md:hidden">{{ item.date | date:'dd.MM.YYYY' }}</span>
+      <kk-series-episode-remove-mirror-button (deleted)="deleteMirrorHandler($event)" [epNumber]="episode.number" [mirrorId]="item.id"></kk-series-episode-remove-mirror-button>
+    </p>
+  </div>
+</div>

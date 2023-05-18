@@ -1,15 +1,17 @@
-<div class="h-screen w-full flex items-center justify-center">
-  <div class="bg-white shadow-xl rounded-md w-1/2 h-1/2 flex items-center relative bg-slate-200">
-    <h4 class="absolute inset-6 text-slate-700 h-4 w-full">Kakkoi | Admin Panel</h4>
-    <form [formGroup]="form" class="w-1/2 pl-6 flex flex-col gap-y-5" (submit)="login()">
-      <kk-input label="E-mail" [labelBlack]="true" type="email" formControlName="email" required placeholder="Wpisz email..."></kk-input>
-      <kk-input label="Hasło" [labelBlack]="true" type="password" formControlName="password" required placeholder="Wpisz hasło..."></kk-input>
+<div class="h-screen w-full flex flex-col items-center justify-center relative pb-24 px-4">
+  <h1 class="!text-2xl md:!text-4xl !font-bold font-roboto text-center pb-3">Zaloguj się do Panelu Admina</h1>
+  <p class="text-neutral-400 font-light text-sm md:text-lg !mb-0 text-center">Współtwórz serwis Kakkoii razem z Nami!</p>
+  <p class="text-neutral-400 font-light text-sm md:text-lg text-center">Dodawaj nowe serie, odcinki i bądź moderatorem!</p>
 
-      <button type="submit" class="w-80 py-4 bg-pink-700 rounded-md shadow-sm text-white font-semibold tracking-widest mt-3" mat-ripple>Zaloguj mnie</button>
-    </form>
-    <div class="w-1/2 h-full rounded-r-md p-5 shadow-md bg-white">
-      <img class="object-cover w-full h-full rounded-r-md shadow-xl" src="assets/auth.jpg" alt=""/>
+  <form (submit)="loginHandler()" [formGroup]="form" class="w-full pt-8 flex justify-center">
+    <div class="flex flex-col gap-y-4 items-center w-[460px]">
+      <input formControlName="email" class="bg-neutral-800 text-base md:text-xl font-light focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full" type="email" placeholder="E-Mail">
+      <input formControlName="password" class="bg-neutral-800 text-base md:text-xl font-light focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full" type="password" placeholder="Hasło">
+      <button [disabled]="form.invalid" type="submit" class="disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Zaloguj się do Kakkoii</button>
     </div>
+  </form>
+
+  <div class="absolute bottom-8 w-64 md:w-80 lg:w-96 opacity-40">
+    <img alt="Kakkoii Logo" src="assets/logo-transparent.png">
   </div>
 </div>
-

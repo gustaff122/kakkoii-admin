@@ -1,25 +1,15 @@
-import { Injectable } from '@angular/core';
-import { CanMatch, Router, UrlTree } from '@angular/router';
+import { CanMatchFn, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class LoggedOutGuard implements CanMatch {
+export const loggedOutGuard: CanMatchFn = (): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
+  const router = inject(Router);
 
-  constructor(
-    private readonly router: Router,
-  ) {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    return true;
+  } else {
+    return router.navigateByUrl('/browser');
   }
-
-  public canMatch(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      return true;
-    } else {
-      return this.router.navigateByUrl('/series');
-    }
-  }
-}
+};

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DefaultComponentState, DefaultComponentStore } from '../../utils/default.component.store';
-import { AuthService } from '../../services/auth.service';
 import { tapResponse } from '@ngrx/component-store';
-import { JwtService } from '../../services/jwt.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtService } from '@kakkoii/services/jwt.service';
+import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/default.component.store';
+import { AuthService } from '@kakkoii/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface AuthComponentState extends DefaultComponentState {
 }
@@ -38,7 +38,7 @@ export class AuthComponentStore extends DefaultComponentStore<AuthComponentState
               error,
             });
 
-            this.matSnackBar.open('Nie udało się zalogować. Sprawdź e-mail i hasło.');
+            this.toastrService.error('Nie udało się zalogować. Sprawdź adres e-mail i hasło.');
           }),
         );
       }),
@@ -49,7 +49,7 @@ export class AuthComponentStore extends DefaultComponentStore<AuthComponentState
     private readonly authService: AuthService,
     private readonly jwtService: JwtService,
     private readonly router: Router,
-    private readonly matSnackBar: MatSnackBar
+    private readonly toastrService: ToastrService,
   ) {
     super({
       loading: false,

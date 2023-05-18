@@ -1,33 +1,32 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '/node_modules/ngx-simple-modal/styles/simple-modal.scss';
+@import 'ngx-toastr/toastr';
+@import "app/styles/normalize";
+@import 'material-icons/iconfont/material-icons.css';
+
+@import "app/styles/typography";
+@import "app/styles/colors";
+@import "app/styles/variables";
+@import "app/styles/ng-select";
 
 body {
-  @apply text-white;
-  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  color: var(--almost-white);
+  background-color: var(--smoky-black);
+  font-family: 'Lato', sans-serif;
 }
 
-.bg {
-  &-gradient {
-    background: linear-gradient(to bottom, #485563, #29323c);
-  }
-
-  &-glass {
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    background-color: rgba(17, 25, 40, 0.75);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
-  }
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
 }
 
-.ng-select-container {
-  height: 46px !important;
-  display: flex;
-  align-items: center;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-  input {
-    margin-top: 7px;
-  }
+input[type=number] {
+  -moz-appearance: textfield;
 }

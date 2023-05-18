@@ -1,10 +1,8 @@
 import { Component, OnInit, Self } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { KkInputComponent } from '../../ui/kk-input/kk-input.component';
-import { MatRippleModule } from '@angular/material/core';
 import { AuthComponentStore } from './auth.component.store';
+import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 
 interface LoginForm {
   email: FormControl<string>;
@@ -23,9 +21,7 @@ interface LoginForm {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    KkInputComponent,
-    MatRippleModule,
+    InputComponent,
   ],
 })
 export class AuthComponent implements OnInit {
@@ -41,14 +37,14 @@ export class AuthComponent implements OnInit {
     this.buildForm();
   }
 
-  public login(): void {
+  public loginHandler(): void {
     this.authComponentStore.login(this.form.getRawValue());
   }
 
   private buildForm(): void {
     this.form = this.formBuilder.group<LoginForm>({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl(null, [ Validators.required ]),
+      password: new FormControl(null, [ Validators.required ]),
     });
   }
 }

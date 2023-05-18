@@ -1,0 +1,54 @@
+<form [formGroup]="form" (submit)="addRelationHandler()" class="flex flex-col gap-y-5 w-full">
+  <h2 class="text-xl col-span-2 mb-2">Zarządzaj relacjami</h2>
+  <div class="flex flex-col gap-y-5 md:flex-row gap-x-5 lg:gap-x-10 w-full">
+    <div class="flex flex-col lg:flex-row gap-x-5 lg:gap-x-10 gap-y-5 w-full">
+      <div class="w-full lg:w-72 xl:w-80 2xl:w-96">
+        <kk-series-autocomplete placeholder="Seria 1" [readonly]="true" formControlName="series1" label="Seria 1"></kk-series-autocomplete>
+      </div>
+      <div class="kk-select-dark-alt w-full lg:w-72 xl:w-80 2xl:w-96 flex flex-col gap-y-2">
+        <label class="tracking-wider font-bold text-xs text-almost-white uppercase">
+          <span>Relacja serii 1 do serii 2</span>
+          <span class="ms-1">*</span>
+        </label>
+        <ng-select [items]="relations"
+                   bindLabel="label"
+                   bindValue="relation"
+                   formControlName="firstRelatedToSecond">
+        </ng-select>
+      </div>
+      <div class="w-full lg:w-72 xl:w-80 2xl:w-96">
+        <kk-series-autocomplete placeholder="Seria 2" formControlName="series2" label="Seria 2"></kk-series-autocomplete>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col lg:flex-row gap-x-5 lg:gap-x-10 gap-y-5 w-full">
+    <div class="hidden lg:block h-full w-full lg:w-72 xl:w-80 2xl:w-96"></div>
+    <div class="hidden lg:block h-full w-full lg:w-72 xl:w-80 2xl:w-96"></div>
+    <div class="h-full w-full lg:w-72 xl:w-80 2xl:w-96">
+      <button [disabled]="form.invalid" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj relację</button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="(hasRelations$ | async) && (relations$ | async) as relations" class="grid grid-cols-3 xl:w-6/12 2xl:w-4/12 mt-10">
+  <h2 class="text-xl font-bold mb-6 col-span-3">Lista relacji:</h2>
+
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Seria</h1>
+    <p class="text-xs md:text-sm font-bold text-neutral-400 h-[29px] flex items-center" *ngFor="let item of relations; trackBy: trackByFn">{{ item.relatedSeries.titleEn }}</p>
+  </div>
+
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Relacja wobec {{ series.titleEn }}</h1>
+    <p class="text-xs md:text-sm font-bold text-neutral-400 h-[29px] flex items-center uppercase" *ngFor="let item of relations; trackBy: trackByFn">{{ item.relation }}</p>
+  </div>
+
+  <div class="flex flex-col gap-y-3">
+    <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Akcje</h1>
+    <div class="h-[29px] flex items-center uppercase" *ngFor="let item of relations; trackBy: trackByFn">
+      <button (click)="removeRelationHandler(item.relatedId, series._id)">
+        <span class="material-icons text-2xl">delete</span>
+      </button>
+    </div>
+  </div>
+</div>

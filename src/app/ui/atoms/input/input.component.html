@@ -1,0 +1,14 @@
+<div class="w-full flex flex-col gap-y-2">
+  <label *ngIf="label" class="tracking-wider font-bold text-xs text-almost-white uppercase">
+    <span>{{ label }}</span>
+    <span class="ms-1" *ngIf="isRequired">*</span>
+  </label>
+  <input
+    class="disabled:grayscale placeholder:text-neutral-600 w-full px-4 py-3 text-almost-white bg-smooth-black outline-none rounded text-almost-white kk-input"
+    [type]="type"
+    [disabled]="disabled"
+    [placeholder]="placeholder"
+    [(ngModel)]="innerValue"
+    (ngModelChange)="updateChanges()"
+  />
+</div>

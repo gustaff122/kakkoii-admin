@@ -1,0 +1,44 @@
+<div class="flex flex-col gap-y-5 pb-10">
+  <h1 class="text-3xl col-span-2 font-roboto">{{ series.titleEn }}</h1>
+  <h2 class="text-xl col-span-2 mb-2">Dodawanie odcinka</h2>
+
+  <form class="flex flex-col gap-y-5" (submit)="addEpisodeHandler()" [formGroup]="form">
+    <div class="flex flex-col md:flex-row gap-y-5 gap-y-5 gap-x-10">
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Numer odcinka" placeholder="Numer odcinka" type="number" formControlName="number"></kk-input>
+      </div>
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Tytuł angielski" placeholder="Tytuł angielski" type="text" formControlName="titleEn"></kk-input>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-y-5 gap-x-10">
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Tytuł japoński" placeholder="Tytuł japoński" type="text" formControlName="titleJp"></kk-input>
+      </div>
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Tytuł japoński [romanizowany]" placeholder="Tytuł japoński [romanizowany]" type="text" formControlName="titleJpRom"></kk-input>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-y-5 gap-x-10">
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Data emisji" type="date" formControlName="aired"></kk-input>
+      </div>
+      <div class="w-full md:w-80 lg:w-96">
+        <kk-input label="Czas trwania [min]" placeholder="Czas trwania [min]" type="number" formControlName="duration"></kk-input>
+      </div>
+    </div>
+
+    <div class="w-full md:w-[680px] lg:w-[808px]">
+      <kk-textarea formControlName="synopsis" placeholder="Główny bohater zostaje potrącony przez ciężarówkę..." label="OPIS" [rows]="9"></kk-textarea>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-y-5 gap-x-10">
+      <div class="w-full md:w-80 lg:w-96 h-full"></div>
+      <div class="w-full md:w-80 lg:w-96">
+        <button [disabled]="form.invalid" type="submit" class="disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj odcinek</button>
+      </div>
+    </div>
+  </form>
+</div>

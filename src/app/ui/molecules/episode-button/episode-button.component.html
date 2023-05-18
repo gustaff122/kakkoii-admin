@@ -1,0 +1,10 @@
+<button (click)="openModalHandler()" class="w-full h-full flex bg-deep-black hover:opacity-70 transition-opacity">
+  <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
+    <span class="translate-y-0.5" *ngIf="episode.number < 10">0{{ episode.number }}</span>
+    <span class="translate-y-0.5" *ngIf="episode.number >= 10">{{ episode.number }}</span>
+  </div>
+  <div class="h-full w-9/12 flex flex-col justify-center items-start gap-y-1 px-4 py-2">
+    <p class="text-md">{{ episode.titleEn }}</p>
+    <p class="text-xs text-shade-of-grey">{{ episode.aired | date: 'dd.MM.yyyy' }}</p>
+  </div>
+</button>

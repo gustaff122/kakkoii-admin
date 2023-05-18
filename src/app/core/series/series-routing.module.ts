@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SeriesRoutingComponent } from './series-routing.component';
-import { SeriesListComponent } from './views/series-list/series-list.component';
-import { SeriesAddComponent } from './views/series-add/series-add.component';
-import { SeriesEpisodesComponent } from './views/series-episdoes/series-episodes.component';
+import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
+import { seriesResolver } from '@kakkoii/resolvers/series-resolver/series.resolver';
+import { seriesExistsGuard } from '@kakkoii/guards/series-exists.guard';
 
 const routes: Routes = [
   {
@@ -13,23 +13,19 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'list',
-      },
-      {
-        path: 'list',
-        component: SeriesListComponent,
+        redirectTo: '/browser',
       },
       {
         path: 'add',
-        component: SeriesAddComponent,
+        loadComponent: () => import('./views/add-series/add-series.component').then(c => c.AddSeriesComponent),
       },
       {
-        path: 'edit/:id',
-        component: SeriesAddComponent,
-      },
-      {
-        path: 'episodes/:id',
-        component: SeriesEpisodesComponent,
+        path: ':seriesPseudo/edit',
+        loadComponent: () => import('./views/edit-series/edit-series.component').then(c => c.EditSeriesComponent),
+        canActivate: [ seriesExistsGuard ],
+        resolve: {
+          [SERIES]: seriesResolver,
+        },
       },
     ],
   },

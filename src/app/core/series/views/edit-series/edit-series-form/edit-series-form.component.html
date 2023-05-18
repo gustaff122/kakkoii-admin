@@ -1,0 +1,172 @@
+<form (submit)="patchSeriesHandler()" [formGroup]="form" class="flex flex-col gap-y-5 w-full pb-10">
+  <h1 class="text-3xl col-span-2 font-roboto">Edycja serii: {{ series.titleEn }}</h1>
+
+  <h2 class="text-xl col-span-2 mb-2">Tytuły serii</h2>
+  <div class="flex flex-col gap-y-5 md:flex-row gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-5">
+      <kk-input label="TYTUŁ ANGLOJĘZYCZNY" placeholder="Tytuł anglojęzyczny" type="text" formControlName="titleEn"></kk-input>
+      <kk-input label="TYTUŁ JAPOŃSKI [ROMANIZOWANY]" placeholder="Tytuł japoński [romanizowany]" type="text" formControlName="titleJpRom"></kk-input>
+      <kk-input label="TYTUŁ JAPOŃSKI" placeholder="Tytuł japoński" type="text" formControlName="titleJp"></kk-input>
+    </div>
+
+    <div formArrayName="titlesAlt" class="flex flex-col gap-y-5">
+      <div class="flex items-center" *ngFor="let _ of titlesAlt.controls; let i = index" [formGroupName]="i">
+        <div class="w-full md:w-80 lg:w-96">
+          <kk-input formControlName="title" [label]="i === 0 ? 'TYTUŁ ALTERNATYWNY' : 'KOLEJNY TYTUŁ ALTERNATYWNY'" [placeholder]="i === 0 ? 'Tytuł alternatywny' : 'Kolejny tytuł alternatywny'" type="text"></kk-input>
+        </div>
+        <button type="button" [disabled]="i === 0" (click)="removeTitleAlt(i)" [ngClass]="i === 0 ? 'text-zinc-500' : 'text-rose-500'" class="ml-4 mt-7 rounded-md ">
+          <span class="material-icons text-2xl">delete</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" (click)="addTitleAlt()" *ngIf="titlesAlt.controls.length <= 2" class="font-bold text-sky-blue underline decoration-2 underline-offset-4">Dodaj tytuł alternatywny</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="text-xl pt-6 col-span-2">Główne informacje</h2>
+  <div class="w-full md:w-[680px] lg:w-[808px]">
+    <kk-textarea formControlName="synopsis" placeholder="Główny bohater zostaje potrącony przez ciężarówkę..." label="OPIS" [rows]="9"></kk-textarea>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">ŹRÓDŁO</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="Źródło" class="w-full" formControlName="source">
+        <ng-option [value]="'light_novel'">Light Novel</ng-option>
+        <ng-option [value]="'manga'">Manga</ng-option>
+        <ng-option [value]="'manhwa'">Manhwa</ng-option>
+        <ng-option [value]="'original'">Seria oryginalna</ng-option>
+      </ng-select>
+    </div>
+
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">TAGI</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="Tagi" [multiple]="true" [closeOnSelect]="false" formControlName="tags">
+        <ng-option *ngFor="let tag of tags" [value]="tag">{{ tag }}</ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">NSFW</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="NSFW" class="w-full" formControlName="nsfw">
+        <ng-option [value]="true">Tak</ng-option>
+        <ng-option [value]="false">Nie</ng-option>
+      </ng-select>
+    </div>
+
+    <div class="w-full md:w-80 lg:w-96 pt-2">
+      <kk-input label="STUDIO" placeholder="Studio" type="text" formControlName="studio"></kk-input>
+    </div>
+  </div>
+
+  <h2 class="text-xl col-span-2 mt-6 mb-2">Szczegóły emisji</h2>
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96">
+      <kk-input label="DATA ROZPOCZĘCIA EMISJI" type="date" formControlName="startDate"></kk-input>
+    </div>
+    <div class="w-full md:w-80 lg:w-96">
+      <kk-input label="DATA ZAKOŃCZENIA EMISJI" type="date" formControlName="endDate"></kk-input>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96">
+      <kk-input label="LICZBA ODCINKÓW" type="number" formControlName="episodesCount"></kk-input>
+    </div>
+    <div class="w-full md:w-80 lg:w-96">
+      <kk-input label="DŁUGOŚĆ ODDCINKA [MIN]" type="number" formControlName="episodeDuration"></kk-input>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">STATUS</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="Status" formControlName="status">
+        <ng-option value="ongoing">Wychodzący</ng-option>
+        <ng-option value="finished">Zakończony</ng-option>
+        <ng-option value="upcoming">Nadchodzący</ng-option>
+        <ng-option value="aborted">Przerwany</ng-option>
+        <ng-option value="tba">TBA</ng-option>
+      </ng-select>
+    </div>
+
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">GRUPA WIEKOWA</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="Grupa wiekowa" formControlName="ageRating">
+        <ng-option *ngFor="let item of ageRatings" [value]="item">{{ item }}</ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2 kk-select-dark-alt">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">TYP</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ng-select placeholder="Typ" formControlName="type">
+        <ng-option [value]="'tv'">TV</ng-option>
+        <ng-option [value]="'movie'">Movie</ng-option>
+        <ng-option [value]="'special'">Special</ng-option>
+        <ng-option [value]="'ona'">ONA</ng-option>
+        <ng-option [value]="'ova'">OVA</ng-option>
+      </ng-select>
+    </div>
+
+    <div class="w-full md:w-80 lg:w-96 pt-2">
+      <kk-input label="LINK DO TRAILERU" placeholder="Link do traileru" type="text" formControlName="trailerUrl"></kk-input>
+    </div>
+  </div>
+
+  <h2 class="text-xl pt-6 col-span-2">Grafiki serii</h2>
+  <div class="flex flex-col md:flex-row gap-y-5 gap-x-5 lg:gap-x-10">
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">PLAKAT PIONOWY</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ngx-dropzone class="!h-32 bg-smooth-black !text-neutral-600" [multiple]="false" (change)="selectPosterHandler($event)">
+        <ngx-dropzone-label>Przerzuć plakat</ngx-dropzone-label>
+        <ngx-dropzone-image-preview *ngIf="thumbnail$ | async" [file]="thumbnail$ | async" ngProjectAs="ngx-dropzone-preview">
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </div>
+
+    <div class="w-full md:w-80 lg:w-96 flex flex-col gap-y-2">
+      <label>
+        <span class="tracking-wider font-bold text-xs text-almost-white">OBRAZ POZIOMY</span>
+        <span class="ms-1">*</span>
+      </label>
+      <ngx-dropzone class="!h-32 bg-smooth-black !text-neutral-600" [multiple]="false" (change)="selectImageHandler($event)">
+        <ngx-dropzone-label>Przerzuć obraz</ngx-dropzone-label>
+        <ngx-dropzone-image-preview *ngIf="image$ | async" [file]="image$ | async" ngProjectAs="ngx-dropzone-preview">
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </div>
+  </div>
+
+  <div class="flex flex-row gap-x-5 lg:gap-x-10 pt-8">
+    <div class="w-full md:w-80 lg:w-96 h-full"></div>
+    <div class="w-full md:w-80 lg:w-96">
+      <button [disabled]="form.invalid" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Zaktualizuj serię</button>
+    </div>
+  </div>
+</form>
