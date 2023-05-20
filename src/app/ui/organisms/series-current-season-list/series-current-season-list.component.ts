@@ -26,7 +26,6 @@ import { SeriesListComponent } from '../../molecules/series-list/series-list.com
 export class SeriesCurrentSeasonListComponent implements OnInit {
 
   public readonly series$: Observable<Series[]> = this.seriesCurrentSeasonListComponentStore.series$;
-  public readonly hasSeries$: Observable<boolean> = this.seriesCurrentSeasonListComponentStore.hasSeries$;
   public readonly loading$: Observable<boolean> = this.seriesCurrentSeasonListComponentStore.loading$;
 
   constructor(
@@ -35,6 +34,6 @@ export class SeriesCurrentSeasonListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.seriesCurrentSeasonListComponentStore.getSeries()
+    this.seriesCurrentSeasonListComponentStore.getSeries();
   }
 }

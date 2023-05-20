@@ -1,4 +1,4 @@
-<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : (hasSeries$ | async) ? contentTpl : null"></ng-container>
+<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : contentTpl"></ng-container>
 
 <ng-template #contentTpl>
   <kk-series-list sectionTitle="Nowości" [series]="series$ | async">

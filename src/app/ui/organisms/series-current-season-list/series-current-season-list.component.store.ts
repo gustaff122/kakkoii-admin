@@ -15,14 +15,13 @@ interface SeriesCurrentSeasonListComponentState extends DefaultComponentState {
 export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore<SeriesCurrentSeasonListComponentState> {
 
   public readonly series$: Observable<Series[]> = this.select((state) => state.series);
-  public readonly hasSeries$: Observable<boolean> = this.select((state) => state.series.length > 0);
 
   public readonly getSeries = this.effect((origin$: Observable<void>) => {
     const { season, year } = this.getSeason();
     const paginator: Paginator = {
       page: 0,
-      limit: 12
-    }
+      limit: 12,
+    };
 
     return origin$.pipe(
       tap(() => {
@@ -34,11 +33,11 @@ export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore
         return this.seriesService.getSeriesList(paginator, { year, season })
           .pipe(
             tapResponse(({ series }) => {
-              this.patchState( {
+              this.patchState({
                 series,
                 loading: false,
               });
-              }, ({ error }: HttpErrorResponse) => {
+            }, ({ error }: HttpErrorResponse) => {
               this.patchState({
                 loading: false,
                 error,
@@ -50,7 +49,7 @@ export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore
   });
 
   private getSeason(): { season: 'winter' | 'fall' | 'spring' | 'summer', year: number } {
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const month = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
     const d = new Date();
     const monthName = month[d.getMonth()];
     const year = d.getFullYear();
@@ -76,10 +75,10 @@ export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore
         return { season: 'fall', year };
 
       case 'December':
-        return { season: 'winter', year: year + 1 }
+        return { season: 'winter', year: year + 1 };
 
       default:
-        return { season: 'winter', year }
+        return { season: 'winter', year };
     }
   }
 
