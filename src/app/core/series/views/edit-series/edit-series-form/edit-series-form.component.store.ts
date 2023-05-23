@@ -68,11 +68,19 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
         formData.append('titleEn', series.titleEn);
         formData.append('titleJp', series.titleJp);
         formData.append('titleJpRom', series.titleJpRom);
-        series.titlesAlt?.map(title => formData.append('titlesAlt[]', title));
+
+        if (series.titlesAlt && series.titlesAlt.length > 0) {
+          series.titlesAlt.map(title => formData.append('titlesAlt[]', title));
+        }
+
         formData.append('startDate', series.startDate);
         formData.append('endDate', series.endDate);
         formData.append('synopsis', series.synopsis);
-        series.tags.map(tag => formData.append('tags[]', tag));
+
+        if (series.tags && series.tags.length > 0) {
+          series.tags.map(tag => formData.append('tags[]', tag));
+        }
+
         formData.append('thumbnailUrl', series?.thumbnailUrl);
         formData.append('ageRating', series.ageRating);
         formData.append('type', series.type);

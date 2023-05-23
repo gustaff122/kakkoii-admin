@@ -91,9 +91,13 @@ export class EditSeriesFormComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.series.titlesAlt.forEach(() => {
+    if (this.series.titlesAlt.length > 0) {
+      this.series.titlesAlt.forEach(() => {
+        this.titlesAlt.push(this.buildTitleAlt());
+      });
+    } else {
       this.titlesAlt.push(this.buildTitleAlt());
-    });
+    }
   }
 
   private buildTitleAlt(): FormGroup<{ title: FormControl<string> }> {
