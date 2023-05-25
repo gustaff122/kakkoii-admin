@@ -3,7 +3,7 @@
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-2 md:gap-8">
     <ng-content></ng-content>
     <ng-container [ngTemplateOutlet]="series.length > 0 ? contentTpl : emptyTpl"></ng-container>
-    <ng-container [ngTemplateOutlet]="loading ? loadingTpl : null"></ng-container>
+    <ng-container [ngTemplateOutlet]="(loading && totalCount > series.length) ? loadingTpl : null"></ng-container>
   </div>
 </div>
 
@@ -16,6 +16,6 @@
 </ng-template>
 
 <ng-template #loadingTpl>
-  <div *ngFor="let _ of [].constructor(16)" class="bg-smooth-black aspect-card w-full rounded-lg h-full animate-pulse">
+  <div *ngFor="let _ of [].constructor(12)" class="bg-smooth-black aspect-card h-72 md:h-96 w-full rounded-lg h-full animate-pulse">
   </div>
 </ng-template>

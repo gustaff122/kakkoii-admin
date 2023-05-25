@@ -2,11 +2,11 @@
   <h1 class="text-3xl font-bold mb-6">{{ series.titleEn }}</h1>
   <div class="flex items-center justify-between w-full">
     <h2 class="text-xl font-bold mb-6">Lista Odcinków:</h2>
-    <button (click)="setDirectionAscHandler()" *ngIf="direction === 'desc'" class="flex gap-x-0.5 items-center">
+    <button (click)="setDirectionAscHandler()" *ngIf="direction === 'desc' && (totalCount$ | async) > 2" class="flex gap-x-0.5 items-center">
       Malejąco
       <span class="material-icons text-2xl">arrow_drop_down</span>
     </button>
-    <button (click)="setDirectionDescHandler()" *ngIf="direction === 'asc'" class="flex gap-x-0.5 items-center">
+    <button (click)="setDirectionDescHandler()" *ngIf="direction === 'asc' && (totalCount$ | async) > 2" class="flex gap-x-0.5 items-center">
       Rosnąco
       <span class="material-icons text-2xl">arrow_drop_up</span>
     </button>

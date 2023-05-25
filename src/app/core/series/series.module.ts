@@ -7,7 +7,6 @@ import { NavbarComponent } from '@kakkoii/ui/organisms/navbar/navbar.component';
 @NgModule({
   declarations: [
     SeriesRoutingComponent,
-
   ],
   imports: [
     CommonModule,

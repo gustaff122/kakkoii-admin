@@ -25,7 +25,7 @@
     <div class="hidden lg:block h-full w-full lg:w-72 xl:w-80 2xl:w-96"></div>
     <div class="hidden lg:block h-full w-full lg:w-72 xl:w-80 2xl:w-96"></div>
     <div class="h-full w-full lg:w-72 xl:w-80 2xl:w-96">
-      <button [disabled]="form.invalid" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj relację</button>
+      <button [disabled]="form.invalid || (loading$ | async)" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj relację</button>
     </div>
   </div>
 </form>
@@ -46,7 +46,7 @@
   <div class="flex flex-col gap-y-3">
     <h1 class="tracking-wider font-bold text-[9px] md:text-xs text-almost-white uppercase">Akcje</h1>
     <div class="h-[29px] flex items-center uppercase" *ngFor="let item of relations; trackBy: trackByFn">
-      <button (click)="removeRelationHandler(item.relatedId, series._id)">
+      <button [disabled]="loading$ | async" class="disabled:opacity-60" (click)="removeRelationHandler(item.relatedId, series._id)">
         <span class="material-icons text-2xl">delete</span>
       </button>
     </div>

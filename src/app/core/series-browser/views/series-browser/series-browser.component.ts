@@ -31,6 +31,7 @@ export class SeriesBrowserComponent {
   public readonly series$: Observable<Series[]> = this.seriesBrowserComponentStore.series$;
   public readonly filters$: Observable<Partial<SeriesListFilters> | null> = this.seriesBrowserComponentStore.filters$;
   public readonly loading$: Observable<boolean> = this.seriesBrowserComponentStore.loading$;
+  public readonly totalCount$: Observable<number | null> = this.seriesBrowserComponentStore.totalCount;
 
   constructor(
     @Self() private readonly seriesBrowserComponentStore: SeriesBrowserComponentStore,

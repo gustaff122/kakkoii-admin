@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { AuthComponentStore } from './auth.component.store';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
+import { Observable } from 'rxjs';
 
 interface LoginForm {
   email: FormControl<string>;
@@ -26,6 +27,7 @@ interface LoginForm {
 })
 export class AuthComponent implements OnInit {
   public form: FormGroup<LoginForm>;
+  public readonly loading$: Observable<boolean> = this.authComponentStore.loading$;
 
   constructor(
     @Self() private readonly authComponentStore: AuthComponentStore,

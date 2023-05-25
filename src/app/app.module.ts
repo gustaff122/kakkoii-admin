@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { SimpleModalModule } from 'ngx-simple-modal';
+import { NgProgressModule } from 'ngx-progressbar';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,12 @@ import { SimpleModalModule } from 'ngx-simple-modal';
     AppRoutingModule,
     BrowserAnimationsModule,
     SimpleModalModule,
+    NgProgressModule.withConfig({
+      spinner: false,
+      color: '#3b5eda',
+      speed: 300,
+      trickleSpeed: 900,
+    }),
     ToastrModule.forRoot(),
     StoreModule.forRoot({}, {}),
   ],

@@ -31,6 +31,7 @@ export class EpisodesListComponent implements OnInit {
 
   public readonly episodes$: Observable<SeriesEpisode[]> = this.seriesPageEpisodesListComponentStore.episodes$;
   public readonly canLoadMore$: Observable<boolean> = this.seriesPageEpisodesListComponentStore.canLoadMore$;
+  public readonly totalCount$: Observable<number | null> = this.seriesPageEpisodesListComponentStore.totalCount$;
   public readonly loading$: Observable<boolean> = this.seriesPageEpisodesListComponentStore.loading$;
 
   constructor(

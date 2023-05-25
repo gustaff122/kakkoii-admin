@@ -20,6 +20,7 @@ export class EpisodesListComponentStore extends DefaultComponentStore<EpisodesLi
 
   public readonly episodes$: Observable<SeriesEpisode[]> = this.select((state) => state.episodes);
   public readonly canLoadMore$: Observable<boolean> = this.select((state) => state.totalCount > state.episodes.length);
+  public readonly totalCount$: Observable<number | null> = this.select((state) => state.totalCount);
 
   public readonly changeDirection = this.effect((origin$: Observable<{ direction: DirectionType }>) => {
     return origin$.pipe(

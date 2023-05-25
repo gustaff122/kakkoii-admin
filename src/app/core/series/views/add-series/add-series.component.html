@@ -166,7 +166,7 @@
   <div class="flex flex-row lg:gap-x-5 gap-x-10 pt-8">
     <div class="w-full md:w-80 lg:w-96 h-full"></div>
     <div class="w-full md:w-80 lg:w-96">
-      <button [disabled]="form.invalid" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj serię</button>
+      <button [disabled]="form.invalid || (loading$ | async)" type="submit" class="w-full disabled:grayscale btn-gradient text-neutral-900 font-bold text-base md:text-xl text-start focus:outline-0 font-roboto rounded-md p-4 md:p-6 w-full">Dodaj serię</button>
     </div>
   </div>
 </form>

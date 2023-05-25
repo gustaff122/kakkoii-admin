@@ -20,4 +20,5 @@ export class SeriesListComponent {
   @Input() series: Series[];
   @Input() sectionTitle: string;
   @Input() loading: boolean;
+  @Input() totalCount: number | null;
 }

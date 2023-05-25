@@ -20,6 +20,7 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
 
   public readonly series$: Observable<Series[]> = this.select((state) => state.series);
   public readonly filters$: Observable<Partial<SeriesListFilters> | null> = this.select((state) => state.filters);
+  public readonly totalCount: Observable<number | null> = this.select((state) => state.totalCount);
 
   public readonly getSeries = this.effect((origin$: Observable<{ filters: Partial<SeriesListFilters> }>) => {
     return origin$.pipe(
@@ -44,7 +45,7 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
               loading: false,
               error: null,
             });
-            }, ({ error }: HttpErrorResponse) => {
+          }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
               error,
@@ -72,14 +73,14 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
 
         return this.seriesService.getSeriesList(paginator, filters).pipe(
           tapResponse(({ series, totalCount }) => {
-            this.patchState((state) =>{
+            this.patchState((state) => {
               return {
                 ...state,
-                series: [...state.series, ...series],
+                series: [ ...state.series, ...series ],
                 totalCount,
                 page: state.page + 1,
                 loading: false,
-              }
+              };
             });
 
           }, ({ error }: HttpErrorResponse) => {
@@ -94,7 +95,7 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
   });
 
   constructor(
-    private readonly seriesService: SeriesService
+    private readonly seriesService: SeriesService,
   ) {
     super({
       series: [],
