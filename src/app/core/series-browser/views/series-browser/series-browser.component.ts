@@ -39,8 +39,6 @@ export class SeriesBrowserComponent {
   }
 
   public getFirstPageHandler(filters: Partial<SeriesListFilters>): void {
-    console.log(filters);
-
     if (filters.year || filters.season || filters.status || filters.tags || filters.name || filters.type) {
       this.seriesBrowserComponentStore.getSeries({ filters });
     }

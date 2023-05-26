@@ -53,7 +53,6 @@ export class AddEpisodeComponent implements OnInit {
 
   public addEpisodeHandler(): void {
     if (this.form.valid) {
-      console.log(this.form.getRawValue());
       this.addEpisodeComponentStore.addEpisode({ episode: this.form.getRawValue() });
     }
   }

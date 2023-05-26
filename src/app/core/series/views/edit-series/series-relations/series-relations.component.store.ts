@@ -91,7 +91,6 @@ export class SeriesRelationsComponentStore extends DefaultComponentStore<EditSer
               loading: false,
               error: null,
             });
-            console.log(relations);
           }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,

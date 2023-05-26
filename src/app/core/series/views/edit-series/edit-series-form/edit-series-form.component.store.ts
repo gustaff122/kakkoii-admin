@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Series } from '@kakkoii/interfaces/series';
 import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/default.component.store';
 import { SeriesService } from '@kakkoii/services/series.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { generateUuid } from '@kakkoii/utils/generate-uuid';
 import { ToastrService } from 'ngx-toastr';
 import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
@@ -100,9 +100,7 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
               loading: false,
             });
 
-            this.router.navigate([ 'browser' ]).then(() => {
-              this.toastrService.success('Seria została zaktualizowana');
-            });
+            this.toastrService.success('Seria została zaktualizowana');
           }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
@@ -117,7 +115,6 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
   constructor(
     private readonly seriesService: SeriesService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router,
     private readonly toastrService: ToastrService,
   ) {
     super({

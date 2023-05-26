@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthComponentStore } from './auth.component.store';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 interface LoginForm {
   email: FormControl<string>;
@@ -23,6 +24,7 @@ interface LoginForm {
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
+    RouterLink,
   ],
 })
 export class AuthComponent implements OnInit {

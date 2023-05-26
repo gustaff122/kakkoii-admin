@@ -107,12 +107,12 @@ export class AddSeriesComponentStore extends DefaultComponentStore<AddSeriesComp
         formData.append('image', image);
 
         return this.seriesService.addNewSeries(formData).pipe(
-          tapResponse(() => {
+          tapResponse((series) => {
             this.patchState({
               loading: false,
             });
 
-            this.router.navigate([ '/browser' ]).then(() => {
+            this.router.navigate([ '/series', series.pseudo, 'edit' ]).then(() => {
               this.toastrService.success('Seria została dodana');
             });
           }, ({ error }: HttpErrorResponse) => {
