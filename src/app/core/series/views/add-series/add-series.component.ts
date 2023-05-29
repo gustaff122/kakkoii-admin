@@ -1,4 +1,4 @@
-import { Component, OnInit, Self } from '@angular/core';
+import { Component, OnDestroy, OnInit, Self } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SeriesForm } from '@kakkoii/interfaces/series-form';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
@@ -32,11 +32,12 @@ import { SeriesAgeRating } from '@kakkoii/types/series-age-rating';
     LoadingSpinnerComponent,
   ],
 })
-export class AddSeriesComponent implements OnInit {
+export class AddSeriesComponent implements OnInit, OnDestroy {
 
   public readonly loading$: Observable<boolean> = this.addSeriesComponentStore.loading$;
   public readonly thumbnail$: Observable<File | null> = this.addSeriesComponentStore.thumbnail$;
   public readonly image$: Observable<File | null> = this.addSeriesComponentStore.image$;
+  public readonly notSetFiles$: Observable<boolean> = this.addSeriesComponentStore.notSetFiles$;
 
   public readonly tags: SeriesTags[] = seriesTagsSet;
   public readonly ageRatings: SeriesAgeRating[] = seriesAgeRatingSet;
@@ -49,8 +50,18 @@ export class AddSeriesComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    const formValue = localStorage.getItem('ADD_SERIES_FORM');
     this.buildForm();
     this.initForm();
+
+    if (formValue) {
+      this.form.patchValue(JSON.parse(formValue));
+    }
+  }
+
+  public ngOnDestroy(): void {
+    const formValue = this.form.getRawValue();
+    localStorage.setItem('ADD_SERIES_FORM', JSON.stringify(formValue));
   }
 
   public get titlesAlt(): FormArray {

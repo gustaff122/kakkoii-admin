@@ -43,6 +43,7 @@ export class EditSeriesFormComponent implements OnInit {
   public readonly loading$: Observable<boolean> = this.editSeriesFormComponentStore.loading$;
   public readonly thumbnail$: Observable<File | null> = this.editSeriesFormComponentStore.thumbnail$;
   public readonly image$: Observable<File | null> = this.editSeriesFormComponentStore.image$;
+  public readonly notSetFiles$: Observable<boolean> = this.editSeriesFormComponentStore.notSetFiles$;
 
   public readonly tags: SeriesTags[] = seriesTagsSet;
   public readonly ageRatings: SeriesAgeRating[] = seriesAgeRatingSet;

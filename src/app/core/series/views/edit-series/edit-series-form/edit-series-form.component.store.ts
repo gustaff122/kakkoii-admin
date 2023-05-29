@@ -20,6 +20,7 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
 
   public readonly thumbnail$: Observable<File | null> = this.select((state) => state.thumbnail);
   public readonly image$: Observable<File | null> = this.select((state) => state.image);
+  public readonly notSetFiles$: Observable<boolean> = this.select((state) => !(state.image && state.thumbnail));
 
   public readonly setImage = this.updater((state, { image }: { image: File | null }): EditSeriesFormComponentState => {
     if (image.type === 'image/jpg' || image.type === 'image/jpeg') {
@@ -70,11 +71,25 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
         formData.append('titleJpRom', series.titleJpRom);
 
         if (series.titlesAlt && series.titlesAlt.length > 0) {
-          series.titlesAlt.map(title => formData.append('titlesAlt[]', title));
+          series.titlesAlt.map(title => {
+            if (title) {
+              formData.append('titlesAlt[]', title);
+            }
+          });
         }
 
-        formData.append('startDate', series.startDate);
-        formData.append('endDate', series.endDate);
+        if (series.startDate) {
+          formData.append('startDate', series.startDate);
+        }
+
+        if (series.endDate) {
+          formData.append('endDate', series.endDate);
+        }
+
+        if (series.trailerUrl) {
+          formData.append('trailerUrl', series.trailerUrl);
+        }
+
         formData.append('synopsis', series.synopsis);
 
         if (series.tags && series.tags.length > 0) {
@@ -84,10 +99,20 @@ export class EditSeriesFormComponentStore extends DefaultComponentStore<EditSeri
         formData.append('thumbnailUrl', series?.thumbnailUrl);
         formData.append('ageRating', series.ageRating);
         formData.append('type', series.type);
-        formData.append('episodeDuration', series.episodeDuration?.toString());
-        formData.append('episodesCount', series.episodesCount?.toString());
+
+        if (series.episodeDuration) {
+          formData.append('episodeDuration', series.episodeDuration.toString());
+        }
+
+        if (series.episodesCount) {
+          formData.append('episodesCount', series.episodesCount.toString());
+        }
+
+        if (series.studio) {
+          formData.append('studio', series.studio);
+        }
+
         formData.append('nsfw', series.nsfw.toString());
-        formData.append('studio', series.studio);
         formData.append('source', series.source);
         formData.append('status', series.status);
 

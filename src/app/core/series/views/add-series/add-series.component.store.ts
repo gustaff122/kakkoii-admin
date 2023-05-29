@@ -20,6 +20,7 @@ export class AddSeriesComponentStore extends DefaultComponentStore<AddSeriesComp
 
   public readonly thumbnail$: Observable<File | null> = this.select((state) => state.thumbnail);
   public readonly image$: Observable<File | null> = this.select((state) => state.image);
+  public readonly notSetFiles$: Observable<boolean> = this.select((state) => !(state.image && state.thumbnail));
 
   public readonly setImage = this.updater((state, { image }: { image: File | null }): AddSeriesComponentState => {
     if (image.type === 'image/jpg' || image.type === 'image/jpeg') {
@@ -69,7 +70,11 @@ export class AddSeriesComponentStore extends DefaultComponentStore<AddSeriesComp
         formData.append('titleJpRom', series.titleJpRom);
 
         if (series.titlesAlt && series.titlesAlt.length > 0) {
-          series.titlesAlt.map(title => formData.append('titlesAlt[]', title));
+          series.titlesAlt.map(title => {
+            if (title) {
+              formData.append('titlesAlt[]', title);
+            }
+          });
         }
 
         if (series.startDate) {
@@ -86,7 +91,7 @@ export class AddSeriesComponentStore extends DefaultComponentStore<AddSeriesComp
           series.tags.map(tag => formData.append('tags[]', tag));
         }
 
-        formData.append('thumbnailUrl', series?.thumbnailUrl);
+        formData.append('thumbnailUrl', series.thumbnailUrl);
         formData.append('ageRating', series.ageRating);
         formData.append('type', series.type);
 
@@ -98,11 +103,17 @@ export class AddSeriesComponentStore extends DefaultComponentStore<AddSeriesComp
           formData.append('episodesCount', series.episodesCount.toString());
         }
 
+        if (series.studio) {
+          formData.append('studio', series.studio);
+        }
+
+        if (series.trailerUrl) {
+          formData.append('trailerUrl', series.trailerUrl);
+        }
+
         formData.append('nsfw', series.nsfw.toString());
-        formData.append('studio', series.studio);
         formData.append('source', series.source);
         formData.append('status', series.status);
-
         formData.append('thumbnail', thumbnail);
         formData.append('image', image);
 
