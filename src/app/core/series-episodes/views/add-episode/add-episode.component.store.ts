@@ -31,7 +31,7 @@ export class AddEpisodeComponentStore extends DefaultComponentStore<AddEpisodeCo
               loading: false,
             });
 
-            this.router.navigate([ '/episodes', seriesPseudo ]);
+            this.router.navigate([ '/episodes', seriesPseudo, 'mirrors', episode.number ]);
           }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
